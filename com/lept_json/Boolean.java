@@ -1,6 +1,6 @@
 package com.lept_json;
 
-public class Boolean extends JsonType {
+public class Boolean extends JsonLept {
 
     public boolean value = false;
 

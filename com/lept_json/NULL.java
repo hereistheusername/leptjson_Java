@@ -1,6 +1,6 @@
 package com.lept_json;
 
-public class NULL extends JsonType{
+public class NULL extends JsonLept {
 
     public Integer value = null;
 

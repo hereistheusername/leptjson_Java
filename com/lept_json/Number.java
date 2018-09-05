@@ -1,6 +1,6 @@
 package com.lept_json;
 
-class Number {
+public class Number extends JsonLept{
     private double value = 0;
 
     Number() {}
