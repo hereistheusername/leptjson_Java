@@ -112,22 +112,22 @@ public class Test {
         Parser parser = new Parser();
         expectEqString("[1.0, 2.0, 3.0, true, false, null, [1.0, 2.0, 233.0]]", parser.parse("[1, 2, 3, true, false, null, [1, 2, 233]]").toString());
     }
+
+    static void parseObject() {
+        Parser parser = new Parser();
+        expectEqString("name: \"Levin\", age: 20", parser.parse("name: Levin, age: 20").toString());
+    }
+
     static void indexTest() {
-        String s = "HelloWorld";
-        int i;
-        for (i = 0; i < s.length(); i++) {
-            if (i % 2 == 0) {continue;}
-            System.out.println(s.charAt(i));
-        }
-        System.out.println(i == s.length());
     }
 
     public static void main(String[] args) {
-//        indexTest();
+        indexTest();
         parseLiteral();
         parseNumber();
         parseString();
         parseArray();
+//        parseObject();
         System.out.format("%d/%d (%3.2f%%) passed\n", passCount, count, passCount * 100.0 / count);
     }
 }
