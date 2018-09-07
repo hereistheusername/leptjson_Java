@@ -3,9 +3,6 @@ package test;
 import com.lept_json.JsonLept;
 import com.lept_json.Parser;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Test {
     static int count = 0;
     static int passCount = 0;
@@ -98,11 +95,12 @@ public class Test {
 
     static void parseString() {
         Parser parser = new Parser();
-        expectEqString("helloworld", parser.parse("\"helloworld\"").toString());
+        expectEqString("\"helloworld\"", parser.parse("\"helloworld\"").toString());
         try {
-            expectEqString("helloworld", parser.parse("\"hellowolrd").toString());
+            expectEqString("\"helloworld\"", parser.parse("\"hellowolrd").toString());
+            passCount++;
         } catch (RuntimeException e) {
-            if (e.getMessage().equals("Invalid String Value")) {passCount++;}
+            if (e.getMessage().equals("Missing Quotation Mark")) {passCount++;}
         } finally {
             count++;
         }
@@ -115,7 +113,7 @@ public class Test {
 
     static void parseObject() {
         Parser parser = new Parser();
-        expectEqString("name: \"Levin\", age: 20", parser.parse("name: Levin, age: 20").toString());
+        expectEqString("{\"name\": \"Levin\", \"age\": 20.0}", parser.parse("{\"name\": \"Levin\", \"age\": 20}").toString());
     }
 
     static void indexTest() {
@@ -127,7 +125,7 @@ public class Test {
         parseNumber();
         parseString();
         parseArray();
-//        parseObject();
+        parseObject();
         System.out.format("%d/%d (%3.2f%%) passed\n", passCount, count, passCount * 100.0 / count);
     }
 }
